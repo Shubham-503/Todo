@@ -1,8 +1,9 @@
-const Todo = require("../models/Todo");
+const Todo = require("../models/Todo")
 
-const createTodoController = async (req, res) => {
+const editTodoController = async (req, res) => {
     try {
-        // Extract title from req
+        //Extract id and title
+        const { id } = req.params
         const { title } = req.body
 
         // Validate title
@@ -12,27 +13,29 @@ const createTodoController = async (req, res) => {
                 message: "Title Can't be Empty",
             })
         }
-        // Create Todo and Save in DB
-        const todo = await Todo.create({ title })
+
+        // Query DB and edit title
+        const todo = await Todo.findById(id);
+        todo.title = title
+        todo.save()
 
         // Send Response Back to Client
         res.status(201).json({
             success: true,
-            message: 'Title Created Successfully',
+            message: 'Title Edited Successfully',
             todo,
         })
+
     } catch (error) {
         // Log the error and send back response to client
         console.log(error.message)
         res.status(400).json({
             success: false,
-            message: 'Error Occured in Title Creation',
+            message: 'Error Occured in Title Edit',
             error
 
         })
     }
-    console.log("In create todo controller")
-
 }
 
-module.exports = createTodoController
+module.exports = editTodoController
