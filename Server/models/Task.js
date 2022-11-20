@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 //Task Schema
-const TaskSchema = mongoose.Schema({
+const TaskSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true
@@ -13,5 +13,5 @@ const TaskSchema = mongoose.Schema({
 
 })
 
-const TaskModel = mongoose.model("Task", TaskSchema)
-export default TaskModel 
+module.exports = mongoose.model("Task", TaskSchema)
+// export default TaskModel 
