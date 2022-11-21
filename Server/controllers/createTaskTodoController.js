@@ -1,6 +1,6 @@
 const Todo = require("../models/Todo")
 
-module.exports = async (req, res) => {
+const createTaskTodoController = async (req, res) => {
     try {
         // Extract todoId an task 
         const todoId = req.params.id
@@ -36,3 +36,5 @@ module.exports = async (req, res) => {
     }
 
 }
+
+module.exports = createTaskTodoController
