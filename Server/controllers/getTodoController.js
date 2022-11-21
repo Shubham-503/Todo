@@ -1,4 +1,3 @@
-const { findById } = require("../models/Todo")
 const Todo = require("../models/Todo")
 
 const getTodoController = async (req, res) => {
@@ -7,7 +6,7 @@ const getTodoController = async (req, res) => {
         const {id} = req.params
 
         // Query DB and get todo
-        const todo = await findById(id);
+        const todo = await Todo.findById(id);
 
         // Send Response Back to Client
         res.status(200).json({
