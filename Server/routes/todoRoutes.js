@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 // Controllers
+const getTodoController = require('../controllers/getTodoController')
+const getTaskTodoController = require('../controllers/getTaskTodoController')
 const createTodoController = require('../controllers/createTodoController')
 const createTaskTodoController = require('../controllers/createTaskTodoController')
 const editTodoController = require('../controllers/editTodoController')
@@ -10,6 +12,8 @@ const deleteTodoController = require('../controllers/deleteTodoController')
 const deleteTaskTodoController = require('../controllers/deleteTaskTodoController')
 
 // Routes
+router.get('/gettodo/:id',getTodoController)
+router.get('/gettask/:id/:idx',getTaskTodoController)
 router.post('/createtodo',createTodoController)
 router.post('/createtask/:id',createTaskTodoController)
 router.put('/edittodo/:id',editTodoController)
