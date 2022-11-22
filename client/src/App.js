@@ -34,7 +34,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="App bg-[#bebebe] mt-4 flex items-center justify-center flex-col border-2">
       <TodoForm createTodo={createTodo} />
       <TodoList todos={todos} />
     </div>
