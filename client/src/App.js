@@ -11,7 +11,7 @@ function App() {
     try {
       const res = await axios.post('/createtodo', { title })
       console.log(res)
-    getTodos()
+      getTodos()
 
     } catch (error) {
       console.log(error.message);

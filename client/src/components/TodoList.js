@@ -24,11 +24,7 @@ const TodoList = ({ todos }) => {
     const res = await axios.get(`/gettasks/${id}`)
   }
 
-  const deleteTask = async (id, idx) => {
-    const res = await axios.delete(`/deletetask/${id}/${idx}`)
-    console.log(res)
-    getTask(id)
-  }
+  
 
   useEffect(() => {
 
@@ -53,22 +49,17 @@ const TodoList = ({ todos }) => {
           </div>
           <div className="tasks">
             <div className="tasks relative left-4 border-2">
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="todoinput  mt-4 flex items-center justify-between text-md">
-                  <input className=' p-1 flex-1' type="text" placeholder='Enter your Todo' name='title' value={task} onChange={(e) => setTask(e.target.value)} />
-                  <button className='ml-8 py-1 px-2  border-2 border-red border-solid' type="submit">Create</button>
-                </div>
-
-              </form>
+             
               {/* {todo.tasks && todo.tasks.map((task,idx) => {
               return <Task key={uuidv4()} idx={idx} id ={todo._id} task={task} deleteTask={deleteTask}/>
             })} */}
-              {todo.tasks.length !== 0 && <Tasks tasks={todo.tasks} id={todo._id} />}
+              {<Tasks tasks={todo.tasks} id={todo._id} />}
             </div>
           </div>
         </div>
       })}
-      <div className="todo p-4 relative w-1/2 border-2">
+
+      {/* <div className="todo p-4 relative w-1/2 border-2">
         <div className="todo-title flex items-center justify-between border-2">
           <h2 className='text-2xl' onClick={(e) => editable(e)} >todo.title</h2>
           <div className="todo-btns ml-2 ">
@@ -217,7 +208,7 @@ const TodoList = ({ todos }) => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
     </div>
   )
