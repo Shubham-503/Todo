@@ -6,7 +6,7 @@ import Tasks from './Tasks';
 
 
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, getTodos}) => {
 
   const [task, setTask] = useState("")
 
@@ -24,6 +24,11 @@ const TodoList = ({ todos }) => {
     const res = await axios.get(`/gettasks/${id}`)
   }
 
+  const handledeleteTodo = async (id)=> {
+    const res = await axios.delete(`/deletetodo/${id}`)
+    getTodos()
+
+  }
   
 
   useEffect(() => {
@@ -42,7 +47,7 @@ const TodoList = ({ todos }) => {
               <button className='mx-2'>
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
-              <button className='ml-2'>
+              <button className='ml-2' onClick={(e)=>handledeleteTodo(todo._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>
             </div>
