@@ -1,4 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+// import { v4 as uuidv4 } from 'uuid';
+// import Task from './Task';
+import Tasks from './Tasks';
+
 
 
 const TodoList = ({ todos }) => {
@@ -10,22 +15,62 @@ const TodoList = ({ todos }) => {
 
   }
 
+  const editable = (e) => {
+    e.preventDefault();
+
+  }
+
+  const getTask = async (id) => {
+    const res = await axios.get(`/gettasks/${id}`)
+  }
+
+  const deleteTask = async (id, idx) => {
+    const res = await axios.delete(`/deletetask/${id}/${idx}`)
+    console.log(res)
+    getTask(id)
+  }
+
+  useEffect(() => {
+
+  }, [])
+
+
   return (
     <div className='todoList flex flex-wrap border-2 justify-around m-4 p-4 border-2'>
+      {console.log(">>>>", todos)}
       {todos && todos.map(todo => {
-        console.log(">>>>", todo)
-        return <div className="todo">
-          <h2>{todo.title}</h2>
+        return <div className="todo  p-4 relative w-1/2 border-2">
+          <div className="todo-title flex items-center justify-between border-2">
+            <h2 className='text-2xl' onClick={(e) => editable(e)} >{todo.title}</h2>
+            <div className="todo-btns ml-2 ">
+              <button className='mx-2'>
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button className='ml-2'>
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
           <div className="tasks">
-            {todo.tasks && todo.tasks.map((task) => {
-              return <p>{task}</p>
-            })}
+            <div className="tasks relative left-4 border-2">
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="todoinput  mt-4 flex items-center justify-between text-md">
+                  <input className=' p-1 flex-1' type="text" placeholder='Enter your Todo' name='title' value={task} onChange={(e) => setTask(e.target.value)} />
+                  <button className='ml-8 py-1 px-2  border-2 border-red border-solid' type="submit">Create</button>
+                </div>
+
+              </form>
+              {/* {todo.tasks && todo.tasks.map((task,idx) => {
+              return <Task key={uuidv4()} idx={idx} id ={todo._id} task={task} deleteTask={deleteTask}/>
+            })} */}
+              {todo.tasks.length !== 0 && <Tasks tasks={todo.tasks} id={todo._id} />}
+            </div>
           </div>
         </div>
       })}
       <div className="todo p-4 relative w-1/2 border-2">
         <div className="todo-title flex items-center justify-between border-2">
-          <h2 className='text-2xl'>todo.title</h2>
+          <h2 className='text-2xl' onClick={(e) => editable(e)} >todo.title</h2>
           <div className="todo-btns ml-2 ">
             <button className='mx-2'>
               <i class="fa-solid fa-pen-to-square"></i>
