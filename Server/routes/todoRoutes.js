@@ -12,6 +12,7 @@ const editTodoController = require('../controllers/editTodoController')
 const editTaskTodoController = require('../controllers/editTaskTodoController')
 const deleteTodoController = require('../controllers/deleteTodoController')
 const deleteTaskTodoController = require('../controllers/deleteTaskTodoController')
+const searchTodos = require('../controllers/searchtodos')
 
 // Routes
 router.get('/gettodos',getTodosController)
@@ -24,5 +25,6 @@ router.put('/edittodo/:id',editTodoController)
 router.put('/edittask/:id/:idx',editTaskTodoController)
 router.delete('/deletetodo/:id',deleteTodoController)
 router.delete('/deletetask/:id/:idx',deleteTaskTodoController)
+router.get('/search',searchTodos)
 
 module.exports = router
