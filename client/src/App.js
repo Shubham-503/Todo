@@ -1,8 +1,15 @@
 import './App.css';
 import axios from 'axios'
+import {
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import { useEffect, useState } from 'react';
+import RegisterUser from './components/RegisterUser';
+import LoginUser from './components/LoginUser';
 
 function App() {
   const [todos, setTodos] = useState("")
@@ -35,9 +42,27 @@ function App() {
 
   return (
     <div className="App bg-[#b3b3b3] pt-4 flex items-center justify-center flex-col border-2">
-      <TodoForm createTodo={createTodo} />
-      <TodoList todos={todos} getTodos={getTodos} />
+      
+
+
+      <Switch>
+          <Route path="/" exact>
+            <TodoForm createTodo={createTodo} />
+            <TodoList todos={todos} getTodos={getTodos} />
+          </Route>
+          <Route path="/login" exact>
+           <h1>login Page</h1>
+           <LoginUser/>
+          </Route>
+          <Route path="/register" exact>
+            <RegisterUser/>
+          </Route>
+          
+        </Switch>
     </div>
+
+
+
   );
 }
 
