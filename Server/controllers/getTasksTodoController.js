@@ -4,10 +4,16 @@ const getTasksTodoController = async (req, res) => {
     try {
         // Extract id 
         const { id } = req.params
+        const { token } = req.cookies
+
 
         // Query DB and get Task
-        const todo = await Todo.findById(id)
-        const task = todo.tasks
+        const todo = await Todo.find({_id:id,user:token})
+        if (todo.length == 0)
+            return res.status(200).json({
+                message: "No todo found"
+            })
+        const task = todo[0].tasks
 
          // Send Response Back to Client
          res.status(200).json({

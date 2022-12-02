@@ -2,9 +2,11 @@ const Todo = require("../models/Todo")
 
 const editTodoController = async (req, res) => {
     try {
-        //Extract id and title
+        //Extract id, title and token
         const { id } = req.params
         const { title } = req.body
+        const { token } = req.cookies
+
 
         // Validate title
         if (!title) {
@@ -15,9 +17,10 @@ const editTodoController = async (req, res) => {
         }
 
         // Query DB and edit title
-        const todo = await Todo.findById(id);
-        todo.title = title
-        todo.save()
+        const todo = await Todo.findOneAndUpdate({_id:id,user:token},{title});
+        
+        // todo.title = title
+        // todo.save()
 
         // Send Response Back to Client
         res.status(201).json({

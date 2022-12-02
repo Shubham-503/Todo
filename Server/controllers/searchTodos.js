@@ -3,8 +3,10 @@ const Todo = require("../models/Todo")
 const searchTodos = async (req, res) => {
 
     try {
-        // Extract query 
+        // Extract query and token
         const { q } = req.query
+        const { token } = req.cookies
+
 
         // validate q
         if (!q) {
@@ -21,8 +23,7 @@ const searchTodos = async (req, res) => {
         }
 
         // Search for todo and tasks
-        const todo = await Todo.find({ $or: [{ title: new RegExp(q, 'i') }, { tasks: new RegExp(q, 'i') }] })
-        // const s = await Todo.find({ title: new RegExp(q,'i') })
+        const todo = await Todo.find({ $or: [{ title: new RegExp(q, 'i') }, { tasks: new RegExp(q, 'i') }],  $and:[{user:token}] })
 
         if (todo.length == 0)
             return res.status(200).json({

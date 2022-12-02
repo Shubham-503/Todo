@@ -2,8 +2,10 @@ const Todo = require("../models/Todo")
 
 const todosByOrderController = async (req, res) => {
     try {
-        //Extract order from req.query
+        //Extract order and token from req
         const { q } = req.query
+        const { token } = req.cookies
+
         let order;
         if (q === "asc") {
             order = -1
@@ -12,7 +14,11 @@ const todosByOrderController = async (req, res) => {
             order = 1
         }
         // Query DB and get todo
-        const todos = await Todo.find().sort({ updatedAt: order })
+        const todos = await Todo.find({user:token}).sort({ updatedAt: order })
+        if (todos.length == 0)
+        return res.status(200).json({
+            message: "No todo found"
+        })
 
         // Send Response Back to Client
         res.status(200).json({

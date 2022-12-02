@@ -5,6 +5,8 @@ const editTaskTodoController = async (req, res) => {
         // Extract id and task
         const { id, idx } = req.params
         const { task } = req.body
+        const { token } = req.cookies
+
 
         // Validate task
         if (!task) {
@@ -15,9 +17,14 @@ const editTaskTodoController = async (req, res) => {
         }
 
         // Query DB and edit task
-        const todo = await Todo.findById(id);
-        todo.tasks[idx]=task
-        todo.save()
+        const todo = await Todo.find({ _id: id, user: token });
+        if (todo.length == 0)
+            return res.status(200).json({
+                message: "No todo found"
+            })
+        todo[0].tasks[idx] = task
+        todo[0].save()
+
 
          // Send Response Back to Client
          res.status(201).json({
