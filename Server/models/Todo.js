@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-//import Task Model
-// const Task = require("./Task")
 
 //Todo Schema
 const TodoSchema = new mongoose.Schema({
@@ -13,10 +11,13 @@ const TodoSchema = new mongoose.Schema({
     tasks: {
         type: [String],
         trim: true
+    },
+    user: {
+        type: mongoose.ObjectId,
+        required:[true, "user Id is missing"]
     }
 },{
     timestamps: true
 })
 
 module.exports = mongoose.model("Todo", TodoSchema)
-// export default TodoModel
