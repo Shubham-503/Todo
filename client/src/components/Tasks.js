@@ -20,11 +20,16 @@ const Tasks = ({ tasks, id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("task creating")
-    const res = await axios.post(`/createtask/${id}`,{task:taskInput});
+    console.log("task creating for id: ", id)
+    try {
+      const res = await axios.post(`/createtask/${id}`,{task:taskInput});
     console.log(res.data.todo.tasks)
     setTask1(res.data.todo.tasks)
     setTaskInput("")
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   useEffect(() => {

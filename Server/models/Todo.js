@@ -13,7 +13,7 @@ const TodoSchema = new mongoose.Schema({
         trim: true
     },
     user: {
-        type: mongoose.ObjectId,
+        type: String,
         required:[true, "user Id is missing"]
     }
 },{

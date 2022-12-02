@@ -1,9 +1,11 @@
 const Todo = require("../models/Todo");
 
+
 const createTodoController = async (req, res) => {
     try {
-        // Extract title from req
+        // Extract title and token from req
         const { title } = req.body
+        const { token } = req.cookies
 
         // Validate title
         if (!title) {
@@ -13,7 +15,7 @@ const createTodoController = async (req, res) => {
             })
         }
         // Create Todo and Save in DB
-        const todo = await Todo.create({ title })
+        const todo = await Todo.create({ title,user:token })
 
         // Send Response Back to Client
         res.status(201).json({

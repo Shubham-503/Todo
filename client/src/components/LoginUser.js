@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import toastr from "toastr"
+import Cookies from 'universal-cookie';
 import api from "../api/api"
 
 
@@ -7,17 +9,26 @@ const LoginUser = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const history = useHistory()
 
     const handleSumit = async (e) => {
+        const cookies = new Cookies();
+ 
         e.preventDefault();
         try {
             // await api.deleteCurrentSession()
           await api.createSession(email, password);
           const data = await api.getAccount();
           console.log(data.$id);
+          cookies.set('token', data.$id);
+
         } catch (e) {
             console.log(e);
         }
+
+        history.push('/')
+        toastr.success('Registration Successful', 'Welcome!')
+
     }
 
 

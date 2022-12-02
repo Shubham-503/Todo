@@ -34,7 +34,7 @@ const RegisterUser = () => {
         setPassword("")
 
         toastr.success('Registration Successful', 'Welcome!')
-        history.push('/login')
+        // history.push('/login')
         
     }
 

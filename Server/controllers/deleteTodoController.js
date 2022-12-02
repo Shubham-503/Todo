@@ -4,9 +4,11 @@ const deleteTodoController = async (req, res) => {
     try {
         // Extract id 
         const { id } = req.params;
+        const { token } = req.cookies
+
 
         // Query DB and delete
-        const todo = await Todo.findByIdAndDelete(id)
+        const todo = await Todo.findOneAndDelete({_id:id,user:token})
 
          // Send Response Back to Client
          res.status(201).json({
