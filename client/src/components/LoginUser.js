@@ -10,9 +10,9 @@ const LoginUser = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const history = useHistory()
+    const cookies = new Cookies();
 
     const handleSumit = async (e) => {
-        const cookies = new Cookies();
  
         e.preventDefault();
         try {
@@ -26,7 +26,7 @@ const LoginUser = () => {
             console.log(e);
         }
 
-        history.push('/')
+        history.push('/todos')
         toastr.success('Registration Successful', 'Welcome!')
 
     }
