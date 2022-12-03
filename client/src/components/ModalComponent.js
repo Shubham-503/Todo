@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 
 
-const ModalComponent = ({ modalData,setModalData,modalSubmit }) => {
+const ModalComponent = ({ modalData, setModalData, modalSubmit }) => {
   console.log(modalData);
   const customStyles = {
     content: {
@@ -16,9 +16,9 @@ const ModalComponent = ({ modalData,setModalData,modalSubmit }) => {
     },
   };
 
-  const handleModalSubmit = (e)=>{
-    modalSubmit(e,modalData.text,modalData.id,modalData.idx)
-    setModalData({...modalData,isOpen:false})
+  const handleModalSubmit = (e) => {
+    modalSubmit(e, modalData.text, modalData.id, modalData.idx)
+    setModalData({ ...modalData, isOpen: false })
   }
 
   Modal.setAppElement('#root');
@@ -27,15 +27,23 @@ const ModalComponent = ({ modalData,setModalData,modalSubmit }) => {
     <Modal
       isOpen={modalData.isOpen}
 
-      onRequestClose={() => { setModalData({...modalData,isOpen:false}) }}
+      onRequestClose={() => { setModalData({ ...modalData, isOpen: false }) }}
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <h2>{modalData.title}</h2>
-      <div className="">
+      {/* <div className="">
         <input type="text" value={modalData.text} onChange={(e)=>{setModalData({...modalData,text:e.target.value}) }} />
         <button onClick={(e)=>handleModalSubmit(e)}>Update</button>
-      </div>
+      </div> */}
+
+      <h2 className='text-4xl mb-4' >{modalData.title}</h2>
+      <form className="flex relative items-center border-b border-b-2 border-teal-500 py-2">
+
+        <input className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none" type="text"  value={modalData.text} onChange={(e)=>{setModalData({...modalData,text:e.target.value}) }}  />
+        <button type="submit" className="absolute right-0 top-0 mt-3 mr-4" onClick={(e)=>handleModalSubmit(e)}>
+          Update
+        </button>
+      </form>
     </Modal>
   )
 }
