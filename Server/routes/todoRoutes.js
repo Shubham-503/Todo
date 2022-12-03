@@ -17,7 +17,7 @@ const todosByOrderController = require('../controllers/todosByOrderController')
 const  auth  = require('../middleware/auth')
 
 // Routes
-router.get('/gettodos',auth,getTodosController)
+router.get('/gettodos',getTodosController)
 router.get('/gettasks/:id',getTasksTodoController)
 router.get('/gettodo/:id',getTodoController)
 router.get('/gettask/:id/:idx',getTaskTodoController)

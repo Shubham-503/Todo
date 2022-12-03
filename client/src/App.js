@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import RegisterUser from './components/RegisterUser';
 import LoginUser from './components/LoginUser';
 import api from './api/api';
+import {  deleteCurrentSession} from './appwrite/utils';
 
 function App() {
   const [todos, setTodos] = useState("")
@@ -48,7 +49,8 @@ function App() {
   const handleSignOut = async (e) => {
     e.preventDefault()
     try {
-      await api.deleteCurrentSession();
+      // await api.deleteCurrentSession();
+      await deleteCurrentSession();
       cookies.remove('token')
     } catch (e) {
       console.log(e)

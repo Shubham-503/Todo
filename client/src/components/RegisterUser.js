@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import api from "../api/api"
 import { Link, Redirect, useHistory } from 'react-router-dom'
 import toastr from "toastr"
+import { createAccount } from '../appwrite/utils'
 
 const RegisterUser = () => {
 
@@ -18,10 +19,13 @@ const RegisterUser = () => {
         const name = `${fname} ${lname}`
        
         try {
-          const user = await api.createAccount(email, password, name);
+        //   const user = await api.createAccount(email, password, name);
+          const user = await createAccount(email, password, name);
         //   const session= await api.createSession(email, password);
           console.log("##################")
           console.log(user)
+         history.push('/login')
+
         //   console.log(session)
          
         } catch (e) {
@@ -34,7 +38,6 @@ const RegisterUser = () => {
         setPassword("")
 
         toastr.success('Registration Successful', 'Welcome!')
-        // history.push('/login')
         
     }
 

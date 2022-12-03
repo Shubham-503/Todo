@@ -1,33 +1,34 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import toastr from "toastr"
 import Cookies from 'universal-cookie';
 import api from "../api/api"
+import { createAccount, createSession, getAccount } from '../appwrite/utils';
 
 
 const LoginUser = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const history = useHistory()
     const cookies = new Cookies();
-
-    const handleSumit = async (e) => {
- 
-        e.preventDefault();
+    const history = useHistory()
+    
+    const handleSubmit = async (e) => {
+        console.log("in login submit",e)
+        e.preventDefault()
+        //   await api.deleteCurrentSession()
         try {
-            // await api.deleteCurrentSession()
-          await api.createSession(email, password);
-          const data = await api.getAccount();
-          console.log(data.$id);
-          cookies.set('token', data.$id);
+            //   await api.createSession(email, password);
+            //   const data = await api.getAccount();
+            await createSession(email, password)
+            const data = await getAccount()
+            cookies.set('token', data.$id);
+            console.log(data.$id);
+            history.push('/todos')
 
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
         }
 
-        history.push('/todos')
-        toastr.success('Registration Successful', 'Welcome!')
 
     }
 
@@ -44,7 +45,7 @@ const LoginUser = () => {
                         <input className="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500 " type="text" placeholder="Username or Email id" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <input className="border rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-yellow-500" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                    <button className="mt-5 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300" type="submit" onClick={(e)=>{handleSumit(e)}}>Sign in</button>
+                    <button className="mt-5 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300" type="submit" onClick={(e) =>  handleSubmit(e) }>Sign in</button>
                     <div className="mt-5 flex justify-between text-sm text-gray-600">
                         {/* <a href="#">Forgot password?</a> */}
                         <Link to={'/register'}>Sign up</Link>

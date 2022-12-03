@@ -11,9 +11,8 @@ let api = {
     let appwrite = new Appwrite();
     appwrite.setEndpoint('http://localhost/v1').setProject('638423a96dc85606a393');
     const account = new Account(appwrite);
-    const database = 2
 
-    api.sdk = { database, account };
+    api.sdk = {  account };
     return appwrite;
   },
 

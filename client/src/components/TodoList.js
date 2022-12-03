@@ -1,38 +1,59 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Modal from 'react-modal';
+
 // import { v4 as uuidv4 } from 'uuid';
 // import Task from './Task';
 import Tasks from './Tasks';
+import ModalComponent from './ModalComponent';
 
 
 
-const TodoList = ({ todos, getTodos}) => {
+const TodoList = ({ todos, getTodos }) => {
 
   const [task, setTask] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalData, setModalData] = useState({
+    id: "",
+    title: "",
+    text: "",
+    isOpen: ""
+  })
+  const [title, setTitle] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
-  }
+  Modal.setAppElement('#root');
 
-  const editable = (e) => {
-    e.preventDefault();
 
-  }
+
 
   const getTask = async (id) => {
     const res = await axios.get(`/gettasks/${id}`)
   }
 
-  const handledeleteTodo = async (id)=> {
+  const handledeleteTodo = async (id) => {
     const res = await axios.delete(`/deletetodo/${id}`)
     getTodos()
 
   }
-  
+
+  const modalSubmit = async (e,todo,id,idx="") => {
+    e.preventDefault()
+    const res = await axios.put(`/edittodo/${id}`,{title:todo})
+    getTodos()
+  }
 
   useEffect(() => {
-
   }, [])
 
 
@@ -40,21 +61,22 @@ const TodoList = ({ todos, getTodos}) => {
     <div className='todoList flex flex-wrap border-2 justify-around m-4 p-4 border-2'>
       {console.log(">>>>", todos)}
       {todos && todos.map(todo => {
-        return <div className="todo  p-4 relative w-1/2 border-2">
+        // setTitle(todo.title)
+        return <div className="todo p-4 relative w-1/2 border-2">
           <div className="todo-title flex items-center justify-between border-2">
-            <h2 className='text-2xl' onClick={(e) => editable(e)} >{todo.title}</h2>
+            <h2 className='text-2xl'  >{todo.title}</h2>
             <div className="todo-btns ml-2 ">
-              <button className='mx-2'>
-                <i class="fa-solid fa-pen-to-square"></i>
+              <button className='mx-2' onClick={() => { setModalData({ title: "Edit Todo", id: todo._id, text: todo.title, isOpen: true }) }} id="editTodo">
+                <i class="fa-solid fa-pen-to-square"  ></i>
               </button>
-              <button className='ml-2' onClick={(e)=>handledeleteTodo(todo._id)}>
+              <button className='ml-2' onClick={(e) => handledeleteTodo(todo._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>
             </div>
           </div>
           <div className="tasks">
             <div className="tasks relative left-4 border-2">
-             
+
               {/* {todo.tasks && todo.tasks.map((task,idx) => {
               return <Task key={uuidv4()} idx={idx} id ={todo._id} task={task} deleteTask={deleteTask}/>
             })} */}
@@ -63,6 +85,8 @@ const TodoList = ({ todos, getTodos}) => {
           </div>
         </div>
       })}
+
+      <ModalComponent modalData={modalData} setModalData={setModalData} modalSubmit={modalSubmit} />
 
       {/* <div className="todo p-4 relative w-1/2 border-2">
         <div className="todo-title flex items-center justify-between border-2">

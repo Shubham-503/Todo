@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import ModalComponent from './ModalComponent';
 
 
 const Tasks = ({ tasks, id }) => {
   const [task1, setTask1] = useState([])
   const [taskInput, setTaskInput] = useState("")
+  const [modalData, setModalData] = useState({
+    id:"",
+    title:"",
+    text:"",
+    isOpen:"",
+    idx:""
+  })
+
   const deleteTask = async (id, idx) => {
     const res = await axios.delete(`/deletetask/${id}/${idx}`)
     console.log(res)
@@ -20,7 +29,7 @@ const Tasks = ({ tasks, id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("task creating for id: ", id)
+    console.log("task creating for id: ", id,e)
     try {
       const res = await axios.post(`/createtask/${id}`,{task:taskInput});
     console.log(res.data.todo.tasks)
@@ -30,6 +39,20 @@ const Tasks = ({ tasks, id }) => {
       console.log(error);
     }
     
+  }
+
+  const modalSubmit = async (e,text,id,idx)=>{
+    e.preventDefault()
+    console.log('In modalSubmit')
+    // IDX missing
+    try {
+      console.log(text,id,idx)
+      const res = await axios.put(`/edittask/${id}/${idx}`,{task:text})
+      console.log(res)
+      getTask(id)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -51,7 +74,7 @@ const Tasks = ({ tasks, id }) => {
       {task1 && task1.map((task, idx) => {
         return <div key={uuidv4()}>
           <span>{task}</span>
-          <button className='mx-2'>
+          <button className='mx-2' onClick={() => { setModalData({ title: "Edit Task", id: id, text: task, isOpen: true, idx:idx }) }} >
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
           <button className='mx-2' onClick={() => deleteTask(id, idx)} >
@@ -59,6 +82,7 @@ const Tasks = ({ tasks, id }) => {
           </button>
         </div>
       })}
+      <ModalComponent modalData={modalData} setModalData={setModalData} modalSubmit={modalSubmit} />
     </div>
 
   )
