@@ -58,21 +58,11 @@ const Tasks = ({ tasks, id }) => {
   useEffect(() => {
     setTask1(tasks)
     // getTask(id)
-
-
   }, [])
 
   // console.log('tasks>>>', tasks)
   return (
     <div >
-
-      {/* <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="todoinput  mt-4 flex items-center justify-between text-md">
-          <input className=' p-1 flex-1' type="text" placeholder='Enter your Todo' name='title' value={taskInput} onChange={(e) => setTaskInput(e.target.value)} />
-          <button className='ml-8 py-1 px-2  border-2 border-red border-solid' type="submit">Create</button>
-        </div>
-      </form> */}
-
       <div id="task-input" class="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent w-full">
         <form className="relative text-lg bg-transparent text-gray-800 w-full" onSubmit={(e) => handleSubmit(e)} >
           <div className="flex items-center border-b border-b-2 border-teal-500 py-2">
@@ -83,18 +73,6 @@ const Tasks = ({ tasks, id }) => {
           </div>
         </form>
       </div>
-
-      {/* {task1 && task1.map((task, idx) => {
-        return <div key={uuidv4()}>
-          <span>{task}</span>
-          <button className='mx-2' onClick={() => { setModalData({ title: "Edit Task", id: id, text: task, isOpen: true, idx: idx }) }} >
-            <i class="fa-solid fa-pen-to-square"></i>
-          </button>
-          <button className='mx-2' onClick={() => deleteTask(id, idx)} >
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-      })} */}
 
       {task1 && task1.map((task, idx) => {
         return  <div id="task" class="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent">
