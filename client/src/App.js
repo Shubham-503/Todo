@@ -49,7 +49,6 @@ function App() {
   const handleSignOut = async (e) => {
     e.preventDefault()
     try {
-      // await api.deleteCurrentSession();
       await deleteCurrentSession();
       cookies.remove('token')
     } catch (e) {
@@ -59,7 +58,7 @@ function App() {
   }
 
   return (
-    <div className="App bg-[#b3b3b3] pt-4 flex items-center justify-center flex-col border-2">
+    <div className="App bg-[#03203C] pt-4 flex items-center justify-center flex-col border-2">
 
 
 
