@@ -13,7 +13,6 @@ import TodoList from './components/TodoList';
 import { useEffect, useState } from 'react';
 import RegisterUser from './components/RegisterUser';
 import LoginUser from './components/LoginUser';
-import api from './api/api';
 import { deleteCurrentSession } from './appwrite/utils';
 
 function App() {

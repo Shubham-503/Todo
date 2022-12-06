@@ -33,7 +33,7 @@ const TodoList = ({ todos, getTodos }) => {
   };
 
   Modal.setAppElement('#root');
-  
+
   const getTask = async (id) => {
     const res = await axios.get(`/gettasks/${id}`)
   }
@@ -86,6 +86,7 @@ const TodoList = ({ todos, getTodos }) => {
 
             </div>
             <p class="text-xs text-slate-500 text-center">Last updated 12 minutes ago</p>
+            <p class="text-xs text-slate-500 text-center">{todo.updatedAt}</p>
           </div>
 
         </div>

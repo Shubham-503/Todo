@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'universal-cookie';
-import api from "../api/api"
 import { createAccount, createSession, getAccount } from '../appwrite/utils';
 
 
@@ -15,10 +14,7 @@ const LoginUser = () => {
     const handleSubmit = async (e) => {
         console.log("in login submit",e)
         e.preventDefault()
-        //   await api.deleteCurrentSession()
         try {
-            //   await api.createSession(email, password);
-            //   const data = await api.getAccount();
             await createSession(email, password)
             const data = await getAccount()
             cookies.set('token', data.$id);
