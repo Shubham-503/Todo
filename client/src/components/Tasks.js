@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import ModalComponent from './ModalComponent';
+import Task from './Task';
 
 
 const Tasks = ({ tasks, id }) => {
@@ -74,7 +75,7 @@ const Tasks = ({ tasks, id }) => {
         </form>
       </div>
 
-      {task1 && task1.map((task, idx) => {
+      {/* {task1 && task1.map((task, idx) => {
         return  <div id="task" class="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent">
         <div class="inline-flex items-center space-x-2">
           <div>
@@ -93,9 +94,12 @@ const Tasks = ({ tasks, id }) => {
             <i class="fa-solid fa-trash" ></i>
           </button>
         </div>
+        <ModalComponent modalData={modalData} setModalData={setModalData} modalSubmit={modalSubmit} />
       </div>
+      })} */}
+       {task1 && task1.map((task, idx) => {
+        return  <Task task={task} id={id} idx={idx} getTask={getTask} />
       })}
-      <ModalComponent modalData={modalData} setModalData={setModalData} modalSubmit={modalSubmit} />
     </div>
 
   )

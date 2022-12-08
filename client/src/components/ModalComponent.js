@@ -29,7 +29,7 @@ const ModalComponent = ({ modalData, setModalData, modalSubmit }) => {
       contentLabel="Example Modal"
     >
       
-      <React.Fragment className="p-4">
+      
       <h2 className='text-4xl mb-4' >{modalData.title}</h2>
       <form className="flex relative items-center border-b border-b-2 border-teal-500 py-2">
         <input className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none w-[350px]" type="text"  value={modalData.text} onChange={(e)=>{setModalData({...modalData,text:e.target.value}) }}  />
@@ -37,7 +37,7 @@ const ModalComponent = ({ modalData, setModalData, modalSubmit }) => {
           Update
         </button>
       </form>
-      </React.Fragment>
+     
     </Modal>
   )
 }
