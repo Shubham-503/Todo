@@ -61,7 +61,7 @@ const TodoList = ({ todos, getTodos }) => {
 
       {todos && todos.map(todo => {
         // setTitle(todo.title)
-        return <div class="antialiased   text-slate-700  w-1/2">
+        return <div class="antialiased   text-slate-700 max-w-1/2">
           <div class="max-w-lg mx-4 my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
             <div class="flex flex-row justify-between items-center">
               <div>
