@@ -63,6 +63,7 @@ function App() {
     setIsSearchInput(true)
     console.log('search called');
     try {
+      // Check is search working for task or not
       const res = await axios.get(`/search?q=${query}`)
       setTodos  (res.data.todo)
       console.log(todos);

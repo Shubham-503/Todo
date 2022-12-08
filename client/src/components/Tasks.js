@@ -82,10 +82,10 @@ const Tasks = ({ tasks, id }) => {
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
-          <div class="text-black-500">{task}</div>
+          <div class="text-black-500">{task.task}</div>
         </div>
         <div>
-          <button class="p-2  inline-flex space-x-1 items-center" onClick={() => { setModalData({ title: "Edit Task", id: id, text: task, isOpen: true, idx: idx }) }} >
+          <button class="p-2  inline-flex space-x-1 items-center" onClick={() => { setModalData({ title: "Edit Task", id: id, text: task.task, isOpen: true, idx: idx }) }} >
             <i class="fa fa-edit"></i>
 
           </button>
