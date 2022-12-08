@@ -22,7 +22,7 @@ const editTaskTodoController = async (req, res) => {
             return res.status(200).json({
                 message: "No todo found"
             })
-        todo[0].tasks[idx] = task
+        todo[0].tasks[idx].task = task
         todo[0].save()
 
 
