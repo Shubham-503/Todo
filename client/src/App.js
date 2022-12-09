@@ -90,27 +90,27 @@ function App() {
             <>
               <TodoForm createTodo={createTodo} />
               {/* Search option */}
-              <div class={ ` ${isSearchActive?"flex":"hidden"}  flex-row justify-between items-center bg-white p-6 border rounded-md antialiased   text-slate-700`}>
+              <div className={ ` ${isSearchActive?"flex":"hidden"}  flex-row justify-between items-center bg-white p-6 border rounded-md antialiased   text-slate-700`}>
               <div>
-                <h1 class="text-3xl font-medium">Search Result</h1>
+                <h1 className="text-3xl font-medium">Search Result</h1>
               </div>
-              <div class="inline-flex space-x-2 items-center ml-12">
+              <div className="inline-flex space-x-2 items-center ml-12">
                 <button href="#" 
-                class="p-2 border border-red-200 rounded-md inline-flex space-x-1 items-center bg-red-600 hover:bg-red-500"
+                className="p-2 border border-red-200 rounded-md inline-flex space-x-1 items-center bg-red-600 hover:bg-red-500"
                 onClick={(e)=>{searchClose(e)}}
                 >
-                  <i class="fa-solid fa-times text-white" ></i>
+                  <i className="fa-solid fa-times text-white" ></i>
                 </button>
               </div>
             </div>
               <TodoList todos={todos} getTodos={getTodos} />
               <div className="flex justify-between items-center absolute top-0 right-4">
-                <div id="task-input" class="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent w-full">
+                <div id="task-input" className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent w-full">
                   <form className="relative text-lg bg-transparent text-white w-full" onSubmit={(e) => handleSearch(e,searchInput)} >
                     <div className="flex items-center  py-2">
                       <input className="bg-transparent border-none mr-3 px-2  focus:outline-none" type="text" placeholder="Search" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                       <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
-                        <i class="fa fa-search text-white" aria-hidden="true"></i>
+                        <i className="fa fa-search text-white" aria-hidden="true"></i>
                       </button>
                     </div>
                   </form>

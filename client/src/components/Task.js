@@ -65,7 +65,7 @@ const Task = ({ task, id, idx, getTask }) => {
 
           </button>
           <button href="#" className="p-2 inline-flex space-x-1 items-center" onClick={() => deleteTask(id, idx)}>
-            <i class="fa-solid fa-trash" ></i>
+            <i className="fa-solid fa-trash" ></i>
           </button>
         </div>
       </div>
