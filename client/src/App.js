@@ -66,7 +66,7 @@ function App() {
       // Check is search working for task or not
       const res = await axios.get(`/search?q=${query}`)
       setTodos(res.data.todo)
-      console.log(todos);
+      console.log(res.data.todo);
     } catch (error) {
       console.log(error.message);
     }
