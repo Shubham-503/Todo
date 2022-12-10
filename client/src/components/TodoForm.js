@@ -9,6 +9,7 @@ const TodoForm = ({ createTodo }) => {
     e.preventDefault();
     console.log(title);
     createTodo(title)
+    setTitle("")
 
   }
 
