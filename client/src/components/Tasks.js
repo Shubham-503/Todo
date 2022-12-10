@@ -67,7 +67,7 @@ const Tasks = ({ tasks, id }) => {
       <div id="task-input" className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent w-full">
         <form className="relative text-lg bg-transparent text-gray-800 w-full" onSubmit={(e) => handleSubmit(e)} >
           <div className="flex items-center border-b border-b-2 border-teal-500 py-2">
-            <input className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Add Task" value={taskInput} onChange={(e) => setTaskInput(e.target.value)}/>
+            <input className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Add Task" value={taskInput} onChange={(e) => setTaskInput(e.target.value)} />
             <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
               <i className="fa fa-plus" aria-hidden="true"></i>
             </button>
@@ -75,30 +75,8 @@ const Tasks = ({ tasks, id }) => {
         </form>
       </div>
 
-      {/* {task1 && task1.map((task, idx) => {
-        return  <div id="task" className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent">
-        <div className="inline-flex items-center space-x-2">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-slate-500">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-          </div>
-          <div className="text-black-500">{task.task}</div>
-        </div>
-        <div>
-          <button className="p-2  inline-flex space-x-1 items-center" onClick={() => { setModalData({ title: "Edit Task", id: id, text: task.task, isOpen: true, idx: idx }) }} >
-            <i className="fa fa-edit"></i>
-
-          </button>
-          <button href="#" className="p-2 inline-flex space-x-1 items-center" onClick={() => deleteTask(id, idx)}>
-            <i className="fa-solid fa-trash" ></i>
-          </button>
-        </div>
-        <ModalComponent modalData={modalData} setModalData={setModalData} modalSubmit={modalSubmit} />
-      </div>
-      })} */}
-       {task1 && task1.map((task, idx) => {
-        return  <Task task={task} id={id} idx={idx} getTask={getTask} key={uuidv4()} />
+      {task1 && task1.map((task, idx) => {
+        return <Task task={task} id={id} idx={idx} getTask={getTask} key={uuidv4()} />
       })}
     </div>
 

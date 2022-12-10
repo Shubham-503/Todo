@@ -57,7 +57,7 @@ const TodoList = ({ todos, getTodos }) => {
   return (
     <div className='todoList flex flex-wrap  justify-around m-4 p-4 '>
       {console.log(">>>>", todos)}
-     
+
 
       {todos && todos.map(todo => {
         // setTitle(todo.title)
@@ -79,7 +79,9 @@ const TodoList = ({ todos, getTodos }) => {
                   <i className="fa-solid fa-trash text-white" ></i>
                 </button>
               </div>
+             
             </div>
+           
 
             <div id="tasks" className="my-5">
               {<Tasks tasks={todo.tasks} id={todo._id} />}
